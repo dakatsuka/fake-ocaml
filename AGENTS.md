@@ -30,13 +30,6 @@ Start with the relevant index before making changes:
 - Include a commit body for non-trivial changes. The body should explain why
   the change is needed first, then summarize what changed to support that
   reason.
-  ```
-  <type>[optional scope]: <description>
-  
-  [optional body]
-  
-  [optional footer(s)]
-  ```
 
 ## Collaboration Rules
 - If instructions are unclear, ask clarifying questions before making assumptions.
