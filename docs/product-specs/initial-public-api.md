@@ -7,7 +7,7 @@ Draft
 ## Problem
 
 OCaml users need a small, reproducible fake data library that can generate
-locale-aware fixture data from OCaml code and from a command-line interface.
+locale-aware fixture data from OCaml code.
 
 ## Goals
 
@@ -17,7 +17,6 @@ locale-aware fixture data from OCaml code and from a command-line interface.
   locales.
 - Compile locale data as OCaml modules, not external YAML or TOML files.
 - Keep runtime dependencies limited to the OCaml standard library and Dune.
-- Provide a minimal CLI for scripted fake data generation.
 
 ## Non-Goals
 
@@ -33,10 +32,9 @@ locale-aware fixture data from OCaml code and from a command-line interface.
 - Provider APIs require explicit `generator` and `locale` arguments.
 - The initial providers are `Name`, `Internet`, and `Lorem`.
 - Supported locale identifiers are exactly `en` and `ja_jp`.
-- Unknown locale and provider identifiers fail with concise errors.
+- `Locale.of_string` accepts exactly `en` and `ja_jp` and returns `Error` for
+  unknown identifiers.
 - The primary user experience is using the library from OCaml code.
-- The CLI executable is named `fake` and is a secondary convenience interface
-  for scripts and shell workflows.
 - `Locale.t` is opaque to public callers. Callers create locale values through
   `Locale.en`, `Locale.ja_jp`, `Locale.all`, or `Locale.of_string`.
 - `Locale.all` returns supported locales in stable identifier order:
@@ -98,25 +96,6 @@ end
 Provider functions may surface these exceptions if compiled locale data is
 invalid, although shipped locale data must not contain empty provider arrays.
 
-## CLI Contract
-
-The `fake` executable accepts only named options. Positional arguments are
-invalid.
-
-- `--provider` is required and must be one of the initial provider identifiers.
-- `--locale` is optional and defaults to `en`.
-- `--seed` is optional and defaults to `0`.
-- `--count` is optional, defaults to `1`, and must be positive.
-- `--format` is optional, defaults to `text`, and must be `text` or `jsonl`.
-- Invalid arguments, missing required arguments, unknown locale identifiers,
-  unknown provider identifiers, invalid output formats, and non-positive counts
-  exit with status `2` and print a concise diagnostic to standard error.
-- Text output prints one generated value per line.
-- JSON Lines output prints one JSON object per generated value using the schema
-  shown below. String fields are escaped according to JSON string escaping rules
-  for quotation marks, backslashes, common control characters, and other ASCII
-  control bytes.
-
 ## OCaml Usage Examples
 
 The main usage pattern is to create an explicit generator and pass it to provider
@@ -169,32 +148,6 @@ let locale =
   | Ok locale -> locale
   | Error message -> invalid_arg message
 ```
-
-## CLI Examples
-
-```sh
-fake --locale en --seed 42 --provider name.full_name --count 3 --format text
-fake --locale ja_jp --seed 42 --provider lorem.sentence --count 2 --format jsonl
-```
-
-Text output prints one generated value per line.
-
-JSON Lines output prints one object per generated value:
-
-```json
-{"locale":"en","provider":"name.full_name","seed":42,"value":"Alice Taylor"}
-```
-
-Initial provider identifiers:
-
-- `name.first_name`
-- `name.last_name`
-- `name.full_name`
-- `internet.username`
-- `internet.domain`
-- `internet.email`
-- `lorem.word`
-- `lorem.sentence`
 
 ## Open Questions
 

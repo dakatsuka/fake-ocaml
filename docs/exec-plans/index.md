@@ -13,6 +13,7 @@ None.
 
 - [Initial Project Foundation](completed/initial-project-foundation.md)
 - [Review-Driven API Hardening](completed/review-driven-api-hardening.md)
+- [Remove Program Surface](completed/remove-program-surface.md)
 
 ## When To Create A Plan
 Create an execution plan when work spans multiple files, introduces a subsystem, changes public behavior, or requires staged verification.

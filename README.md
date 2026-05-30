@@ -4,7 +4,7 @@ An Ocaml library for generating fake data in different languages.
 
 ## Status
 Initial development. The first API surface is intentionally small while the
-project establishes provider, locale, CLI, and CI conventions.
+project establishes provider, locale, and CI conventions.
 
 ## Usage
 Library usage:
@@ -14,13 +14,6 @@ let generator = Fake.Generator.make ~seed:42
 let name = Fake.Name.full_name ~generator ~locale:Fake.Locale.en
 ```
 
-CLI usage:
-
-```sh
-fake --locale en --seed 42 --provider name.full_name --count 3 --format text
-fake --locale ja_jp --seed 42 --provider lorem.sentence --count 2 --format jsonl
-```
-
 Initial locales:
 
 - `en`
@@ -28,14 +21,14 @@ Initial locales:
 
 Initial providers:
 
-- `name.first_name`
-- `name.last_name`
-- `name.full_name`
-- `internet.username`
-- `internet.domain`
-- `internet.email`
-- `lorem.word`
-- `lorem.sentence`
+- `Fake.Name.first_name`
+- `Fake.Name.last_name`
+- `Fake.Name.full_name`
+- `Fake.Internet.username`
+- `Fake.Internet.domain`
+- `Fake.Internet.email`
+- `Fake.Lorem.word`
+- `Fake.Lorem.sentence`
 
 ## Development
 Expected local checks:

@@ -5,6 +5,10 @@ This directory is the source of truth for fake-ocaml's technical design.
 
 - [Initial Architecture](initial-architecture.md)
 
+## Architecture Decision Records
+
+- [ADR 0001: Library-Only Package](adr/0001-library-only-package.md)
+
 ## When To Add Or Update A Design Doc
 Create or update a design document when a change affects:
 

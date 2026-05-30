@@ -23,8 +23,8 @@ those contracts.
 
 ## Clarifications
 
-- The primary user experience is OCaml library usage; the CLI remains a
-  secondary interface.
+- The primary user experience is OCaml library usage.
+- The previous program surface is secondary and is later superseded by ADR 0001.
 - Locale extensibility is the main architectural risk identified by independent
   review.
 - Improvements should preserve the initial provider scope: `Name`, `Internet`,
@@ -33,19 +33,19 @@ those contracts.
 ## Plan Assessment
 
 This is the right next plan to execute. The completed foundation already has a
-usable library, CLI, tests, and private locale data modules, but the public
-locale type still exposes constructors and provider modules still contain
+usable library, program surface, tests, and private locale data modules, but the
+public locale type still exposes constructors and provider modules still contain
 locale-specific formatting branches. Those choices are acceptable for a first
-foundation, but they become compatibility liabilities once callers depend on
-the API.
+foundation, but they become compatibility liabilities once callers depend on the
+API.
 
 The next work item is therefore:
 
 1. Harden public contracts before adding providers.
 2. Make locale extension an internal data change instead of a public variant
    change.
-3. Add tests for documented failure modes and CLI edge cases that are currently
-   under-specified.
+3. Add tests for documented failure modes and program edge cases that are
+   currently under-specified.
 
 The plan intentionally defers broader generator features and new provider
 domains. Adding split/copy semantics or address/company/payment providers would
@@ -100,9 +100,9 @@ Recommended implementation shape:
   - `lorem.format_sentence : string list -> string`
 - Keep `Internet.email` provider-owned for now because the current product
   contract defines no locale-specific email formatting.
-- Avoid turning CLI JSON rendering into public library API. If direct escaping
-  tests are needed, move the escaping helper into a private testable module
-  owned by the executable.
+- Avoid turning program JSON rendering into public library API. If direct
+  escaping tests are needed, move the escaping helper into a private testable
+  module owned by the program.
 - Do not add generator splitting or copying in this plan. Those operations need
   a separate product decision because they create stronger reproducibility
   promises.
@@ -127,8 +127,8 @@ Recommended implementation shape:
       - same-seed generator reproducibility and state advancement;
       - locale-owned formatting for English and Japanese full names;
       - locale-owned formatting for English and Japanese lorem sentences;
-      - CLI JSONL schema and string escaping;
-      - CLI negative paths for missing provider, unknown provider, unknown
+      - program JSONL schema and string escaping;
+      - program negative paths for missing provider, unknown provider, unknown
         locale, invalid format, non-positive count, and unexpected positional
         arguments.
 - [x] Green: implement the smallest API/design changes that satisfy the updated
@@ -151,8 +151,8 @@ Recommended implementation shape:
   locale data records through `format_full_name` and `format_sentence`.
 - `Generator.t` remains mutable and sequential. The API still does not expose
   copy, split, jump, or domain-safe sharing operations.
-- CLI JSON escaping remains private to the executable through a small
-  `fake_cli_json` library used for focused tests.
+- JSON escaping remains private to the program through a small helper library
+  used for focused tests. This decision is no longer current after ADR 0001.
 - The initial product spec and design doc remain `Draft`; accepting them is a
   separate documentation decision.
 
@@ -173,13 +173,15 @@ Recommended implementation shape:
 - Moved locale-varying provider formatting from `Name` and `Lorem` into
   compiled locale data.
 - Added black-box locale tests, generator contract tests, provider formatting
-  tests, CLI JSON escaping tests, CLI negative-path tests, and source-level
-  static contract checks.
+  tests, program JSON escaping tests, program negative-path tests, and
+  source-level static contract checks.
 - Added `*.install` to `.gitignore` because `dune build @install` generates a
   package install file in the repository root.
 - A context-free implementation review found no blocking issues. Residual risks
   are that JSON escaping is tested through the private helper rather than an
   end-to-end generated value, and the static provider check is grep-based.
+- The program surface from this plan is removed by ADR 0001 and the
+  `Remove Program Surface` execution plan.
 
 ## Commit
 

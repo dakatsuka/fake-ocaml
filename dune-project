@@ -13,7 +13,7 @@
  (name fake)
  (synopsis "Fake data generation for OCaml")
  (description
-  "An OCaml library and CLI for generating fake data in multiple locales.")
+  "An OCaml library for generating fake data in multiple locales.")
  (depends
   (ocaml
    (>= "5.0"))

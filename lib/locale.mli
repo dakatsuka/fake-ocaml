@@ -17,7 +17,7 @@ val all : t list
 (** All supported locales in stable identifier order. *)
 
 val to_string : t -> string
-(** [to_string locale] returns the stable CLI/API identifier for [locale]. *)
+(** [to_string locale] returns the stable API identifier for [locale]. *)
 
 val of_string : string -> (t, string) result
 (** [of_string value] parses a locale identifier.

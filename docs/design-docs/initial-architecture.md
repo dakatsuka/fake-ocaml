@@ -6,9 +6,9 @@ Draft
 
 ## Context
 
-fake-ocaml starts as a small OCaml 5.x library and CLI for generating
-locale-aware fake data. The project favors explicit state, compiled locale data,
-and narrow public APIs.
+fake-ocaml starts as a small OCaml 5.x library for generating locale-aware fake
+data. The project favors explicit state, compiled locale data, and narrow public
+APIs.
 
 ## Goals
 
@@ -17,7 +17,7 @@ and narrow public APIs.
 - Make locale data type-checked OCaml code.
 - Keep random generation reproducible for tests through explicit generator
   values.
-- Provide enough provider surface to validate library, locale, and CLI design.
+- Provide enough provider surface to validate library and locale design.
 
 ## Non-Goals
 
@@ -27,8 +27,7 @@ and narrow public APIs.
 
 ## Proposed Design
 
-The project contains one public library, `fake`, and one public executable,
-`fake`.
+The project contains one public library, `fake`.
 
 The library is organized around small modules:
 
@@ -63,6 +62,11 @@ type name = {
   format_full_name : first:string -> last:string -> string;
 }
 
+type internet = {
+  usernames : string array;
+  domains : string array;
+}
+
 type lorem = {
   words : string array;
   format_sentence : string list -> string;
@@ -79,10 +83,6 @@ thread/domain-safe sharing operations. Callers that need independent streams
 create separate generators with explicit seeds. Sharing one generator
 concurrently across OCaml domains or system threads is outside the public
 contract.
-
-The CLI maps stable provider identifiers such as `name.full_name` to public
-provider functions. It supports text and JSON Lines output without adding a JSON
-library dependency.
 
 ## Contracts
 
@@ -104,9 +104,6 @@ The hardened public contracts are:
 - `Generator.int` raises `Invalid_argument` for non-positive bounds.
 - `Generator.choose` raises `Invalid_argument` for empty arrays.
 - Provider modules do not pattern match on public locale constructors.
-- CLI JSON Lines output escapes string fields according to JSON string rules for
-  quotation marks, backslashes, common control characters, and other ASCII
-  control bytes.
 
 ## Alternatives Considered
 
@@ -120,22 +117,21 @@ The hardened public contracts are:
   change a public variant type and encourage caller-side locale branching.
 - Generator copy/split operations: deferred because they require stronger
   sequence-stability and independence guarantees than the first API needs.
-- Runtime JSON dependency for the CLI: rejected for now because the JSON Lines
-  schema is small and string escaping can be covered by focused tests.
+- Public program surface: rejected for the initial package because the primary
+  product surface is the OCaml library and provider behavior can be validated
+  directly through library tests.
 
 ## Third-Party Review
 
 A context-free sub-agent reviewed the design direction before implementation.
 The review requested fixed provider scope, explicit test dependency policy,
-concrete API signatures, stable CLI provider identifiers, JSONL schema, and CI
-commands. Those points are incorporated in this design.
+concrete API signatures, and CI commands. Those points are incorporated in this
+design.
 
 ## Validation
 
 - Alcotest unit tests cover generator reproducibility, locale parsing, and
   provider behavior.
-- CLI tests cover text output, JSONL output, deterministic seeds, and invalid
-  locale handling.
 - CI runs build, test, format, static, install, and opam lint checks on OCaml
   5.0.x and 5.4.x.
 
