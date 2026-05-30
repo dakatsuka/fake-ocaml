@@ -37,6 +37,21 @@ locale-aware fixture data from OCaml code and from a command-line interface.
 - The primary user experience is using the library from OCaml code.
 - The CLI executable is named `fake` and is a secondary convenience interface
   for scripts and shell workflows.
+- `Locale.t` is opaque to public callers. Callers create locale values through
+  `Locale.en`, `Locale.ja_jp`, `Locale.all`, or `Locale.of_string`.
+- `Locale.all` returns supported locales in stable identifier order:
+  `[Locale.en; Locale.ja_jp]`.
+- Locale-specific provider formatting is part of compiled locale behavior. The
+  initial locale-specific formatting rules are full-name order/separator and
+  lorem sentence joining/capitalization/punctuation.
+- `Generator.t` is mutable. Sequential reuse of one generator advances its
+  state; creating a fresh generator with the same seed recreates the same
+  sequence for the same library/runtime implementation.
+- The first API does not provide generator copy, split, jump, or domain-safe
+  sharing operations. Callers that need independent generation streams create
+  separate generators with explicit seeds.
+- Sharing one generator concurrently across OCaml domains or system threads is
+  outside the public contract.
 
 ## Public Contracts
 
@@ -51,7 +66,7 @@ module Generator : sig
 end
 
 module Locale : sig
-  type t = En | Ja_jp
+  type t
 
   val en : t
   val ja_jp : t
@@ -77,6 +92,30 @@ module Lorem : sig
   val sentence : generator:Generator.t -> locale:Locale.t -> string
 end
 ```
+
+`Generator.int` raises `Invalid_argument` when `bound <= 0`.
+`Generator.choose` raises `Invalid_argument` when passed an empty array.
+Provider functions may surface these exceptions if compiled locale data is
+invalid, although shipped locale data must not contain empty provider arrays.
+
+## CLI Contract
+
+The `fake` executable accepts only named options. Positional arguments are
+invalid.
+
+- `--provider` is required and must be one of the initial provider identifiers.
+- `--locale` is optional and defaults to `en`.
+- `--seed` is optional and defaults to `0`.
+- `--count` is optional, defaults to `1`, and must be positive.
+- `--format` is optional, defaults to `text`, and must be `text` or `jsonl`.
+- Invalid arguments, missing required arguments, unknown locale identifiers,
+  unknown provider identifiers, invalid output formats, and non-positive counts
+  exit with status `2` and print a concise diagnostic to standard error.
+- Text output prints one generated value per line.
+- JSON Lines output prints one JSON object per generated value using the schema
+  shown below. String fields are escaped according to JSON string escaping rules
+  for quotation marks, backslashes, common control characters, and other ASCII
+  control bytes.
 
 ## OCaml Usage Examples
 

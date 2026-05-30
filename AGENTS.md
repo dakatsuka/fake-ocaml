@@ -27,6 +27,9 @@ Start with the relevant index before making changes:
 - Prefer names and structure that future maintainers and agentic AI can follow during operations and incident analysis.
 - Write repository documentation, source comments, commit messages, and public technical artifacts in English.
 - Write commit messages according to [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+- Include a commit body for non-trivial changes. The body should explain why
+  the change is needed first, then summarize what changed to support that
+  reason.
   ```
   <type>[optional scope]: <description>
   
