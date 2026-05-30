@@ -3,6 +3,8 @@ This directory is the source of truth for fake-ocaml's technical design.
 
 ## Current Documents
 
+- [Initial Architecture](initial-architecture.md)
+
 ## When To Add Or Update A Design Doc
 Create or update a design document when a change affects:
 

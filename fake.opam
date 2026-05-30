@@ -1,0 +1,20 @@
+opam-version: "2.0"
+synopsis: "Fake data generation for OCaml"
+description:
+  "An OCaml library and CLI for generating fake data in multiple locales."
+maintainer: ["Dai Akatsuka"]
+authors: ["Dai Akatsuka"]
+license: "MIT"
+homepage: "https://github.com/dakatsuka/fake-ocaml"
+bug-reports: "https://github.com/dakatsuka/fake-ocaml/issues"
+depends: [
+  "ocaml" {>= "5.0"}
+  "dune" {>= "3.11"}
+  "alcotest" {with-test}
+  "ocamlformat" {= "0.29.0" & with-dev-setup}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+]
+dev-repo: "git+https://github.com/dakatsuka/fake-ocaml.git"

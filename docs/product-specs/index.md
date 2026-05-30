@@ -3,6 +3,8 @@ Product specs define externally visible behavior and user expectations.
 
 ## Current Specs
 
+- [Initial Public API](initial-public-api.md)
+
 ## When To Add Or Update A Product Spec
 Create or update a product spec when work affects:
 

@@ -1,0 +1,8 @@
+(library
+ (name fake)
+ (public_name fake)
+ (private_modules
+  locale_data
+  locale_data_types
+  locale_data_en
+  locale_data_ja_jp))

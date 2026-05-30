@@ -1,0 +1,9 @@
+(tests
+ (names generator_test locale_test name_test internet_test lorem_test)
+ (libraries fake alcotest))
+
+(rule
+ (alias runtest)
+ (deps cli_tests.sh)
+ (action
+  (run bash %{dep:cli_tests.sh} %{bin:fake})))
