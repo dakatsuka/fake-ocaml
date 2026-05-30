@@ -8,8 +8,10 @@
 type name = Locale_data_types.name = {
   first_names : string array;  (** Given names available for name providers. *)
   last_names : string array;  (** Family names available for name providers. *)
+  format_full_name : first:string -> last:string -> string;
+      (** Locale-owned full-name formatter. *)
 }
-(** Locale-specific data for person name providers. *)
+(** Locale-specific data and formatting for person name providers. *)
 
 type internet = Locale_data_types.internet = {
   usernames : string array;
@@ -18,8 +20,12 @@ type internet = Locale_data_types.internet = {
 }
 (** Locale-specific data for internet providers. *)
 
-type lorem = Locale_data_types.lorem = { words : string array }
-(** Locale-specific words used by lorem providers. *)
+type lorem = Locale_data_types.lorem = {
+  words : string array;
+  format_sentence : string list -> string;
+      (** Locale-owned sentence formatter. *)
+}
+(** Locale-specific words and formatting used by lorem providers. *)
 
 type t = Locale_data_types.t = {
   name : name;  (** Data consumed by {!Name}. *)

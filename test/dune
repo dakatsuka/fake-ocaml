@@ -1,9 +1,32 @@
 (tests
  (names generator_test locale_test name_test internet_test lorem_test)
+ (modules generator_test locale_test name_test internet_test lorem_test)
  (libraries fake alcotest))
+
+(test
+ (name cli_json_test)
+ (modules cli_json_test)
+ (libraries fake_cli_json alcotest))
 
 (rule
  (alias runtest)
  (deps cli_tests.sh)
  (action
   (run bash %{dep:cli_tests.sh} %{bin:fake})))
+
+(rule
+ (alias runtest)
+ (deps
+  static_contract_tests.sh
+  ../lib/locale.mli
+  ../lib/name.ml
+  ../lib/internet.ml
+  ../lib/lorem.ml)
+ (action
+  (run
+   bash
+   %{dep:static_contract_tests.sh}
+   %{dep:../lib/locale.mli}
+   %{dep:../lib/name.ml}
+   %{dep:../lib/internet.ml}
+   %{dep:../lib/lorem.ml})))

@@ -25,23 +25,6 @@ let generate provider ~generator ~locale =
   | "lorem.sentence" -> Fake.Lorem.sentence ~generator ~locale
   | value -> fail ("unknown provider: " ^ value)
 
-let json_escape value =
-  let buffer = Buffer.create (String.length value) in
-  String.iter
-    (function
-      | '"' -> Buffer.add_string buffer "\\\""
-      | '\\' -> Buffer.add_string buffer "\\\\"
-      | '\b' -> Buffer.add_string buffer "\\b"
-      | '\012' -> Buffer.add_string buffer "\\f"
-      | '\n' -> Buffer.add_string buffer "\\n"
-      | '\r' -> Buffer.add_string buffer "\\r"
-      | '\t' -> Buffer.add_string buffer "\\t"
-      | c when Char.code c < 0x20 ->
-          Buffer.add_string buffer (Printf.sprintf "\\u%04x" (Char.code c))
-      | c -> Buffer.add_char buffer c)
-    value;
-  Buffer.contents buffer
-
 let print_value ~format ~locale ~provider ~seed value =
   match format with
   | Text -> print_endline value
@@ -49,7 +32,9 @@ let print_value ~format ~locale ~provider ~seed value =
       Printf.printf
         "{\"locale\":\"%s\",\"provider\":\"%s\",\"seed\":%d,\"value\":\"%s\"}\n"
         (Fake.Locale.to_string locale)
-        (json_escape provider) seed (json_escape value)
+        (Fake_cli_json.escape_string provider)
+        seed
+        (Fake_cli_json.escape_string value)
 
 let () =
   let locale_arg = ref "en" in

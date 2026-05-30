@@ -7,11 +7,12 @@ Execution plans are first-class development artifacts for substantial work.
 
 ## Active Plans
 
-- [Review-Driven API Hardening](active/review-driven-api-hardening.md)
+None.
 
 ## Completed Plans
 
 - [Initial Project Foundation](completed/initial-project-foundation.md)
+- [Review-Driven API Hardening](completed/review-driven-api-hardening.md)
 
 ## When To Create A Plan
 Create an execution plan when work spans multiple files, introduces a subsystem, changes public behavior, or requires staged verification.

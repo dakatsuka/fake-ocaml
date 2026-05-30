@@ -27,6 +27,11 @@ if "$bin" --locale unknown --provider name.full_name >/tmp/fake_cli_out 2>/tmp/f
 fi
 grep -q "unknown locale" /tmp/fake_cli_err || fail "unknown locale error was not reported"
 
+if "$bin" --locale en >/tmp/fake_cli_out 2>/tmp/fake_cli_err; then
+  fail "missing provider unexpectedly succeeded"
+fi
+grep -q -- "missing --provider" /tmp/fake_cli_err || fail "missing provider error was not reported"
+
 if "$bin" --locale en --provider unknown.provider >/tmp/fake_cli_out 2>/tmp/fake_cli_err; then
   fail "unknown provider unexpectedly succeeded"
 fi
@@ -41,3 +46,9 @@ if "$bin" --locale en --provider name.full_name --count 0 >/tmp/fake_cli_out 2>/
   fail "invalid count unexpectedly succeeded"
 fi
 grep -q "count must be positive" /tmp/fake_cli_err || fail "invalid count error was not reported"
+
+if "$bin" --locale en --provider name.full_name extra >/tmp/fake_cli_out 2>/tmp/fake_cli_err; then
+  fail "unexpected positional argument unexpectedly succeeded"
+fi
+grep -q "unexpected argument: extra" /tmp/fake_cli_err ||
+  fail "unexpected positional argument error was not reported"

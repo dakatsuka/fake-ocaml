@@ -1,4 +1,9 @@
+(library
+ (name fake_cli_json)
+ (modules fake_cli_json))
+
 (executable
  (name main)
  (public_name fake)
- (libraries fake))
+ (modules main)
+ (libraries fake fake_cli_json))

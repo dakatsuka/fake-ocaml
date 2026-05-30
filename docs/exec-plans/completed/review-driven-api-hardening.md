@@ -2,7 +2,7 @@
 
 ## Status
 
-Active
+Completed
 
 ## Objective
 
@@ -90,6 +90,9 @@ Recommended implementation shape:
 
 - Hide locale constructors in `locale.mli`; if the implementation keeps private
   variants internally, do not expose them through the interface.
+- Dispatch from `Locale_data.get` through the narrow public locale contract,
+  currently `Locale.to_string`, so provider modules and locale data lookup do
+  not depend on public constructors.
 - Move provider formatting branches out of provider modules. `Locale_data`
   should expose only the minimal locale-owned formatting functions needed by
   providers:
@@ -103,13 +106,17 @@ Recommended implementation shape:
 - Do not add generator splitting or copying in this plan. Those operations need
   a separate product decision because they create stronger reproducibility
   promises.
+- Treat source-level locale opacity and provider constructor references as
+  static contract checks. The behavior tests remain black-box, while a focused
+  shell check verifies `locale.mli` exposes `type t` without constructors and
+  provider modules no longer mention `Locale.En` or `Locale.Ja_jp`.
 
 ## Steps
 
-- [ ] Explore: inspect current public API, locale data flow, tests, and docs.
-- [ ] Design review: request sub-agent review for the revised locale and
+- [x] Explore: inspect current public API, locale data flow, tests, and docs.
+- [x] Design review: request sub-agent review for the revised locale and
       generator design before implementation.
-- [ ] Red: add focused tests for:
+- [x] Red: add focused tests for:
       - public locale opacity by checking that `lib/locale.mli` exposes
         `type t` without constructors, plus a black-box test using only
         `Fake.Locale.en`, `Fake.Locale.ja_jp`, `Fake.Locale.all`,
@@ -124,43 +131,56 @@ Recommended implementation shape:
       - CLI negative paths for missing provider, unknown provider, unknown
         locale, invalid format, non-positive count, and unexpected positional
         arguments.
-- [ ] Green: implement the smallest API/design changes that satisfy the updated
+- [x] Green: implement the smallest API/design changes that satisfy the updated
       contracts.
-- [ ] Refactor: keep locale data maintainable by locale while avoiding public
+- [x] Refactor: keep locale data maintainable by locale while avoiding public
       exposure of internal data representation or provider-side locale
       branching.
-- [ ] Static checks: run formatting and static checks, then fix findings.
-- [ ] Code review: request sub-agent review after implementation.
-- [ ] Re-review: fix review findings and repeat review until it passes.
+- [x] Static checks: run formatting and static checks, then fix findings.
+- [x] Code review: request sub-agent review after implementation.
+- [x] Re-review: fix review findings and repeat review until it passes.
 
 ## Decisions
 
-Record final decisions during this task for:
-
-- Locale type abstraction and extension strategy. Current planned decision:
-  public `Locale.t` is abstract before release.
-- Locale-owned formatting templates or functions. Current planned decision:
-  move full-name and lorem-sentence locale branches into compiled locale data.
-- Generator state sharing and reproducibility semantics. Current planned
-  decision: mutable sequential generators only; no copy/split/domain-safe
-  sharing contract.
-- Documentation status: keep the initial product spec and design doc in `Draft`
-  until implementation and verification pass, then consider moving them to
-  `Accepted`.
+- Public `Locale.t` is abstract. The implementation may keep private
+  constructors, but callers use `Locale.en`, `Locale.ja_jp`, `Locale.all`,
+  `Locale.to_string`, and `Locale.of_string`.
+- `Locale_data.get` dispatches through `Locale.to_string` so locale data lookup
+  does not require public constructors.
+- Locale-specific full-name and lorem sentence formatting now lives in compiled
+  locale data records through `format_full_name` and `format_sentence`.
+- `Generator.t` remains mutable and sequential. The API still does not expose
+  copy, split, jump, or domain-safe sharing operations.
+- CLI JSON escaping remains private to the executable through a small
+  `fake_cli_json` library used for focused tests.
+- The initial product spec and design doc remain `Draft`; accepting them is a
+  separate documentation decision.
 
 ## Verification
 
-- `dune build @all`
-- `dune runtest`
-- `dune build @fmt`
-- `dune build @check`
-- `dune build @install`
-- `opam lint fake.opam`
+- `dune build @all`: passed.
+- `dune runtest --force`: passed.
+- `dune build @fmt`: passed.
+- `dune build @check`: passed.
+- `dune build @install`: passed.
+- `opam lint fake.opam`: passed.
+- `git diff --check`: passed.
 
 ## Completion Notes
 
-To be filled when implementation finishes.
+- Hardened the public locale contract by making `Locale.t` abstract in
+  `locale.mli`.
+- Moved locale-varying provider formatting from `Name` and `Lorem` into
+  compiled locale data.
+- Added black-box locale tests, generator contract tests, provider formatting
+  tests, CLI JSON escaping tests, CLI negative-path tests, and source-level
+  static contract checks.
+- Added `*.install` to `.gitignore` because `dune build @install` generates a
+  package install file in the repository root.
+- A context-free implementation review found no blocking issues. Residual risks
+  are that JSON escaping is tested through the private helper rather than an
+  end-to-end generated value, and the static provider check is grep-based.
 
 ## Commit
 
-To be filled when committed.
+Not committed yet.
