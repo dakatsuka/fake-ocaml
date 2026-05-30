@@ -37,8 +37,8 @@ Start with the relevant index before making changes:
 
 ## Collaboration Rules
 - If instructions are unclear, ask clarifying questions before making assumptions.
-- After completing the design phase and before starting implementation, request an objective review from a sub-agent. Treat the feedback as input rather than authority: evaluate it critically, refine the design, and incorporate only well-justified changes.
-- After implementation, ask a sub-agent for code review. Fix any findings and repeat review until the review passes.
+- After design work, ask a context-free sub-agent for third-party review. Treat the feedback as input rather than authority: evaluate it critically, incorporate only well-justified changes and refine the design.
+- After implementation, ask a context-free sub-agent for code review. Fix any findings and repeat review until the review passes.
 
 ## Documentation Workflow
 - New product behavior starts in `docs/product-specs/`.
