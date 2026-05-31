@@ -1,10 +1,11 @@
 # fake-ocaml
 
-An Ocaml library for generating fake data in different languages.
+An OCaml library for generating fake data in different languages.
 
 ## Status
-Initial development. The first API surface is intentionally small while the
-project establishes provider, locale, and CI conventions.
+Active development. The accepted initial API is intentionally small: a
+library-only package with explicit generators, locale-aware providers, and
+compiled OCaml locale data.
 
 ## Usage
 Library usage:
@@ -53,6 +54,7 @@ Start with [AGENTS.md](AGENTS.md) for agent-facing workflow guidance.
 
 Key product spec documents:
 - [Initial Public API](docs/product-specs/initial-public-api.md)
+- [Future Product Work](docs/product-specs/future-work.md)
 
 Key design documents:
 - [Initial Architecture](docs/design-docs/initial-architecture.md)

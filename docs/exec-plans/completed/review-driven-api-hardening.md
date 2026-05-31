@@ -153,8 +153,9 @@ Recommended implementation shape:
   copy, split, jump, or domain-safe sharing operations.
 - JSON escaping remains private to the program through a small helper library
   used for focused tests. This decision is no longer current after ADR 0001.
-- The initial product spec and design doc remain `Draft`; accepting them is a
-  separate documentation decision.
+- The initial product spec and design doc remained `Draft` after this plan.
+  They were accepted later during documentation maintenance after the initial
+  public API had settled.
 
 ## Verification
 
@@ -185,4 +186,4 @@ Recommended implementation shape:
 
 ## Commit
 
-Not committed yet.
+`a5e62de feat: harden initial public API contracts`

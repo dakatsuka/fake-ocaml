@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft
+Accepted
 
 ## Problem
 
@@ -151,7 +151,11 @@ let locale =
   | Error message -> invalid_arg message
 ```
 
-## Open Questions
+## Future Work
 
-- The final opam package name must be checked before publication.
-- PPX derive syntax and package boundaries remain future design work.
+- Opam publication and registry naming are release-packaging work, not a
+  blocker for this accepted library API.
+- PPX derive syntax and package boundaries require a later product spec and
+  design document.
+- Broad provider domains such as address, phone, company, and payment require
+  later product specs before implementation.

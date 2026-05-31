@@ -105,4 +105,4 @@ Provider modules remain `Name`, `Internet`, and `Lorem`.
 
 ## Commit
 
-Not committed yet.
+`b1c4f5f refactor: remove public program surface`

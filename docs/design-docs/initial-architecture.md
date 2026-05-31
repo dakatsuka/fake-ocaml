@@ -2,7 +2,7 @@
 
 ## Status
 
-Draft
+Accepted
 
 ## Context
 
@@ -137,7 +137,10 @@ design.
 - CI runs build, test, format, static, install, and opam lint checks on OCaml
   5.0.x and 5.4.x.
 
-## Open Questions
+## Future Work
 
-- Final opam package naming must be confirmed before publication.
+- Opam publication and registry naming are release-packaging work outside this
+  initial architecture.
 - PPX derive API shape requires a later product spec and design document.
+- Broad provider domains and additional locales require later product specs and,
+  where module boundaries change, design updates.

@@ -88,4 +88,4 @@ val paragraph : generator:Generator.t -> locale:Locale.t -> string
 
 ## Commit
 
-Not committed yet.
+`3b8e069 feat: add lorem paragraph provider`
