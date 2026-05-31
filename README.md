@@ -29,6 +29,7 @@ Initial providers:
 - `Fake.Internet.email`
 - `Fake.Lorem.word`
 - `Fake.Lorem.sentence`
+- `Fake.Lorem.paragraph`
 
 ## Development
 Expected local checks:

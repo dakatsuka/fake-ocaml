@@ -24,6 +24,8 @@ type lorem = Locale_data_types.lorem = {
   words : string array;
   format_sentence : string list -> string;
       (** Locale-owned sentence formatter. *)
+  format_paragraph : string list -> string;
+      (** Locale-owned paragraph formatter. *)
 }
 (** Locale-specific words and formatting used by lorem providers. *)
 

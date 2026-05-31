@@ -52,6 +52,7 @@ by locale. The first such rules are:
 
 - `Name.full_name`: given-name/family-name order and separator.
 - `Lorem.sentence`: word joining, capitalization, and terminal punctuation.
+- `Lorem.paragraph`: sentence joining.
 
 The minimal internal locale data shape for this pass is:
 
@@ -70,6 +71,7 @@ type internet = {
 type lorem = {
   words : string array;
   format_sentence : string list -> string;
+  format_paragraph : string list -> string;
 }
 ```
 

@@ -12,6 +12,7 @@ None.
 ## Completed Plans
 
 - [Initial Project Foundation](completed/initial-project-foundation.md)
+- [Lorem Paragraph Provider](completed/lorem-paragraph.md)
 - [Review-Driven API Hardening](completed/review-driven-api-hardening.md)
 - [Remove Program Surface](completed/remove-program-surface.md)
 

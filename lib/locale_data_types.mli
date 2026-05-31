@@ -14,7 +14,11 @@ type name = {
 type internet = { usernames : string array; domains : string array }
 (** Raw data required by internet providers. *)
 
-type lorem = { words : string array; format_sentence : string list -> string }
+type lorem = {
+  words : string array;
+  format_sentence : string list -> string;
+  format_paragraph : string list -> string;
+}
 (** Raw data and locale-owned formatting required by lorem providers. *)
 
 type t = { name : name; internet : internet; lorem : lorem }

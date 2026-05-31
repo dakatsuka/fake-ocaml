@@ -1,5 +1,6 @@
 let format_full_name ~first ~last = last ^ " " ^ first
 let format_sentence words = String.concat "" words ^ "。"
+let format_paragraph sentences = String.concat "" sentences
 
 let data =
   Locale_data_types.
@@ -20,5 +21,6 @@ let data =
         {
           words = [| "これは"; "ダミー"; "文章"; "です"; "日本語"; "データ"; "生成"; "します" |];
           format_sentence;
+          format_paragraph;
         };
     }

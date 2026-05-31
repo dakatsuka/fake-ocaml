@@ -5,6 +5,8 @@ let format_sentence = function
   | first :: rest ->
       String.concat " " (String.capitalize_ascii first :: rest) ^ "."
 
+let format_paragraph sentences = String.concat " " sentences
+
 let data =
   Locale_data_types.
     {
@@ -37,5 +39,6 @@ let data =
               "elit";
             |];
           format_sentence;
+          format_paragraph;
         };
     }

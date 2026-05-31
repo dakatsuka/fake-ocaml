@@ -41,7 +41,8 @@ locale-aware fixture data from OCaml code.
   `[Locale.en; Locale.ja_jp]`.
 - Locale-specific provider formatting is part of compiled locale behavior. The
   initial locale-specific formatting rules are full-name order/separator and
-  lorem sentence joining/capitalization/punctuation.
+  lorem sentence joining/capitalization/punctuation plus paragraph sentence
+  joining.
 - `Generator.t` is mutable. Sequential reuse of one generator advances its
   state; creating a fresh generator with the same seed recreates the same
   sequence for the same library/runtime implementation.
@@ -88,6 +89,7 @@ end
 module Lorem : sig
   val word : generator:Generator.t -> locale:Locale.t -> string
   val sentence : generator:Generator.t -> locale:Locale.t -> string
+  val paragraph : generator:Generator.t -> locale:Locale.t -> string
 end
 ```
 
@@ -126,7 +128,7 @@ let user_fixture ~seed ~locale =
   {
     name = Fake.Name.full_name ~generator ~locale;
     email = Fake.Internet.email ~generator ~locale;
-    bio = Fake.Lorem.sentence ~generator ~locale;
+    bio = Fake.Lorem.paragraph ~generator ~locale;
   }
 ```
 

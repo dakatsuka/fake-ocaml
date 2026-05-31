@@ -12,6 +12,7 @@ type internet = Locale_data_types.internet = {
 type lorem = Locale_data_types.lorem = {
   words : string array;
   format_sentence : string list -> string;
+  format_paragraph : string list -> string;
 }
 
 type t = Locale_data_types.t = {
