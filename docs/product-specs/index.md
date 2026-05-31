@@ -3,6 +3,7 @@ Product specs define externally visible behavior and user expectations.
 
 ## Current Specs
 
+- [Address Provider](address-provider.md)
 - [Initial Public API](initial-public-api.md)
 - [Future Product Work](future-work.md)
 

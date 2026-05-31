@@ -3,6 +3,8 @@ References store external context that future agents need available inside the r
 
 ## Current References
 
+- [Faker Ruby Address Provider](faker-ruby-address.md)
+
 ## Reference Policy
 
 - Prefer concise summaries over large copied documents.

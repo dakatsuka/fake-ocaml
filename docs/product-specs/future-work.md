@@ -23,8 +23,10 @@ silently widening the accepted initial API.
 
 ## Candidate Work
 
-- Additional provider domains: address, phone, company, payment, and similar
-  broad Faker-style areas.
+- Additional provider domains: phone, company, payment, and similar broad
+  Faker-style areas.
+- Address provider implementation after the draft Address provider spec and
+  design are reviewed.
 - Additional locales beyond `en` and `ja_jp`.
 - Larger compiled locale datasets for existing providers.
 - PPX derive support and any related package boundaries.
