@@ -25,10 +25,10 @@ silently widening the accepted initial API.
 
 - Additional provider domains: phone, company, payment, and similar broad
   Faker-style areas.
-- Address provider implementation after the draft Address provider spec and
-  design are reviewed.
 - Additional locales beyond `en` and `ja_jp`.
 - Larger compiled locale datasets for existing providers.
+- Address provider follow-up APIs such as country, region abbreviations,
+  postal-code aliases, coordinates, and time zones.
 - PPX derive support and any related package boundaries.
 - Release packaging and publication, including final opam registry naming.
 

@@ -153,7 +153,12 @@ for each function and note that invalid shipped data may surface
 
 ## Third-Party Review
 
-Pending before implementation.
+A context-free sub-agent reviewed the Address provider design before
+implementation. The review found `community` and `secondary_address` coherent
+with the compiled-locale architecture, requested an explicit fictional-data
+policy, and requested explicit deferral for Faker Ruby-compatible aliases such
+as `state_abbr`, `zip`, and `postcode`. Those changes were incorporated before
+implementation.
 
 ## Validation
 

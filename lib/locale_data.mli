@@ -29,10 +29,37 @@ type lorem = Locale_data_types.lorem = {
 }
 (** Locale-specific words and formatting used by lorem providers. *)
 
+type address = Locale_data_types.address = {
+  regions : string array;  (** Administrative areas available for addresses. *)
+  cities : string array;  (** City names available for addresses. *)
+  communities : string array;
+      (** Neighborhood, district, or community names available for addresses. *)
+  street_names : string array;
+      (** Street or area names available for addresses. *)
+  building_numbers : string array;
+      (** Building or block numbers available for addresses. *)
+  secondary_addresses : string array;
+      (** Apartment, suite, room, or building-unit values available for
+          addresses. *)
+  postal_codes : string array;  (** Postal-code-like values for addresses. *)
+  format_street_address :
+    building_number:string -> street_name:string -> string;
+      (** Locale-owned street-address formatter. *)
+  format_full_address :
+    postal_code:string ->
+    region:string ->
+    city:string ->
+    street_address:string ->
+    string;
+      (** Locale-owned full-address formatter. *)
+}
+(** Locale-specific data and formatting used by address providers. *)
+
 type t = Locale_data_types.t = {
   name : name;  (** Data consumed by {!Name}. *)
   internet : internet;  (** Data consumed by {!Internet}. *)
   lorem : lorem;  (** Data consumed by {!Lorem}. *)
+  address : address;  (** Data consumed by {!Address}. *)
 }
 (** Complete data bundle for one locale. *)
 

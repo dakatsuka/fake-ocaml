@@ -17,3 +17,6 @@ module Internet = Internet
 
 module Lorem = Lorem
 (** Placeholder text providers. *)
+
+module Address = Address
+(** Postal address providers. *)

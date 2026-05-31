@@ -1,6 +1,18 @@
 (tests
- (names generator_test locale_test name_test internet_test lorem_test)
- (modules generator_test locale_test name_test internet_test lorem_test)
+ (names
+  generator_test
+  locale_test
+  name_test
+  internet_test
+  lorem_test
+  address_test)
+ (modules
+  generator_test
+  locale_test
+  name_test
+  internet_test
+  lorem_test
+  address_test)
  (libraries fake alcotest))
 
 (rule
@@ -10,7 +22,8 @@
   ../lib/locale.mli
   ../lib/name.ml
   ../lib/internet.ml
-  ../lib/lorem.ml)
+  ../lib/lorem.ml
+  ../lib/address.ml)
  (action
   (run
    bash
@@ -18,4 +31,5 @@
    %{dep:../lib/locale.mli}
    %{dep:../lib/name.ml}
    %{dep:../lib/internet.ml}
-   %{dep:../lib/lorem.ml})))
+   %{dep:../lib/lorem.ml}
+   %{dep:../lib/address.ml})))

@@ -3,3 +3,4 @@ module Locale = Locale
 module Name = Name
 module Internet = Internet
 module Lorem = Lorem
+module Address = Address
