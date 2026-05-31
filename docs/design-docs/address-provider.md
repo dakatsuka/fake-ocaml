@@ -26,16 +26,19 @@ formatting, or random-generation mechanisms.
 - Runtime data files or third-party address datasets.
 - Postal-code parsing or validation.
 - Country-aware formatting beyond the existing `en` and `ja_jp` locales.
-- Real place-name datasets in the first Address provider.
+- Real place-name datasets in the first Address provider, except the complete
+  `ja_jp` prefecture list.
 
 ## Proposed Design
 
 Add a public `Address` module beside `Name`, `Internet`, and `Lorem`.
 
-The first data arrays use fictional sample values for regions, cities,
-communities, street names, building numbers, secondary addresses, and postal
-codes. Values should be locale-shaped and plausible enough for test fixtures,
-but they should not use copied real postal datasets or imply deliverability.
+The first data arrays use fictional sample values for English regions and all
+cities, communities, street names, building numbers, secondary addresses, and
+postal codes. Japanese regions are an exception: `ja_jp` uses all 47 real
+prefecture names because downstream systems often validate prefecture values.
+Values should be locale-shaped and plausible enough for test fixtures, but they
+should not use copied real postal datasets or imply deliverability.
 
 The provider exposes primitive selectors and two composed values:
 
@@ -155,10 +158,12 @@ for each function and note that invalid shipped data may surface
 
 A context-free sub-agent reviewed the Address provider design before
 implementation. The review found `community` and `secondary_address` coherent
-with the compiled-locale architecture, requested an explicit fictional-data
-policy, and requested explicit deferral for Faker Ruby-compatible aliases such
-as `state_abbr`, `zip`, and `postcode`. Those changes were incorporated before
-implementation.
+with the compiled-locale architecture, requested an explicit data policy, and
+requested explicit deferral for Faker Ruby-compatible aliases such as
+`state_abbr`, `zip`, and `postcode`. Those changes were incorporated before
+implementation. The data policy was later refined so `ja_jp` regions use the
+complete real Japanese prefecture list while the rest of the first Address data
+remains fictional.
 
 ## Validation
 

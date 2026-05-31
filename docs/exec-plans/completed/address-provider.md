@@ -21,7 +21,8 @@ street/full address functions for the existing `en` and `ja_jp` locales.
 
 - The design review completed before implementation and found no remaining
   implementation-blocking ambiguity.
-- Initial address data uses fictional, locale-shaped sample values.
+- Initial address data uses fictional, locale-shaped sample values, except that
+  `ja_jp` regions use the complete real Japanese prefecture list.
 - `community` and `secondary_address` are primitive selectors, not components
   of `full_address` in this pass.
 
@@ -80,7 +81,9 @@ end
 
 - Added `Fake.Address` with primitive selectors, `street_address`, and
   `full_address`.
-- Added fictional English and Japanese address locale data.
+- Added fictional English address locale data and Japanese address locale data
+  with real prefecture regions plus fictional municipality and street-level
+  values.
 - Added locale-owned street/full address formatting.
 - Added Address tests for primitive generation and locale-specific formatting.
 - Updated README provider list and future-work notes.
@@ -90,4 +93,4 @@ end
 
 ## Commit
 
-Not committed yet.
+`269116a feat: add address provider`

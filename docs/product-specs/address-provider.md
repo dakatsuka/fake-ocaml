@@ -26,18 +26,22 @@ growth without adding runtime dependencies or external locale files.
 - Country selection, geocoding, coordinates, and validation are out of scope.
 - Long-term byte-for-byte sequence compatibility remains out of scope.
 - Runtime loading of external address datasets is out of scope.
-- Real place-name datasets are out of scope for the first Address provider.
+- Real place-name datasets are out of scope for the first Address provider
+  except for the complete `ja_jp` prefecture list used by `region`.
 
 ## Requirements
 
 - `Address` is exposed from the public `Fake` module.
 - Provider functions require explicit `generator` and `locale` arguments.
 - Shipped address locale data uses fictional sample place names and
-  postal-code-like strings. The data should look plausible enough for fixtures
-  but must not claim real-world postal correctness.
+  postal-code-like strings, except that `ja_jp` `region` values are the complete
+  list of real Japanese prefectures. The data should look plausible enough for
+  fixtures but must not claim real-world postal correctness.
 - `region` returns a locale-specific administrative area string. For `en`, this
-  is state-like sample data. For `ja_jp`, this is prefecture-like sample data.
-- `city` returns a locale-specific city string.
+  is state-like sample data. For `ja_jp`, this is one of the 47 real Japanese
+  prefectures.
+- `city` returns a locale-specific municipality string. For `ja_jp`, fictional
+  city values may include city, ward, town, and village suffixes.
 - `community` returns a locale-specific neighborhood, district, or community
   string.
 - `street_name` returns a locale-specific street or area name string.

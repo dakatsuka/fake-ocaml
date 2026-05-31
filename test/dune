@@ -33,3 +33,12 @@
    %{dep:../lib/internet.ml}
    %{dep:../lib/lorem.ml}
    %{dep:../lib/address.ml})))
+
+(rule
+ (alias runtest)
+ (deps static_address_data_tests.sh ../lib/locale_data_ja_jp.ml)
+ (action
+  (run
+   bash
+   %{dep:static_address_data_tests.sh}
+   %{dep:../lib/locale_data_ja_jp.ml})))
