@@ -4,6 +4,7 @@ This directory is the source of truth for fake-ocaml's technical design.
 ## Current Documents
 
 - [Address Provider Design](address-provider.md)
+- [Company Provider Design](company-provider.md)
 - [Initial Architecture](initial-architecture.md)
 
 ## Architecture Decision Records

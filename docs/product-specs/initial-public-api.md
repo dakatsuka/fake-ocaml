@@ -157,6 +157,6 @@ let locale =
   blocker for this accepted library API.
 - PPX derive syntax and package boundaries require a later product spec and
   design document.
-- The Address provider has an accepted product spec and design document. Other
-  broad provider domains such as phone, company, and payment still require later
-  product specs before implementation.
+- The Address and Company providers have accepted product specs and design
+  documents. Other broad provider domains such as phone and payment still
+  require later product specs before implementation.

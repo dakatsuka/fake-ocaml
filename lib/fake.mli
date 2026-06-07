@@ -20,3 +20,6 @@ module Lorem = Lorem
 
 module Address = Address
 (** Postal address providers. *)
+
+module Company = Company
+(** Company providers. *)

@@ -45,6 +45,6 @@ move into its own product spec with:
 
 ## Open Questions
 
-- Which provider domain should be the next post-Address expansion: phone,
-  company, payment, or another Faker-style area?
+- Which provider domain should be the next post-Company expansion: phone,
+  payment, or another Faker-style area?
 - Should additional locales be prioritized before adding broad provider domains?

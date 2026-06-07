@@ -13,6 +13,20 @@ let format_street_address ~building_number ~street_name =
 let format_full_address ~postal_code ~region ~city ~street_address =
   street_address ^ ", " ^ city ^ ", " ^ region ^ " " ^ postal_code
 
+let format_company_name ~pattern ~last_names ~suffix =
+  match (pattern, last_names) with
+  | 0, [ last ] -> last ^ " " ^ suffix
+  | 1, [ left; right ] -> left ^ "-" ^ right
+  | 2, [ first; second; third ] -> first ^ ", " ^ second ^ " and " ^ third
+  | _ -> invalid_arg "format_company_name"
+
+let format_catch_phrase = function
+  | [] -> ""
+  | first :: rest -> String.concat " " (String.capitalize_ascii first :: rest)
+
+let format_buzz_phrase words =
+  words |> List.map String.lowercase_ascii |> String.concat " "
+
 let data =
   Locale_data_types.
     {
@@ -77,5 +91,34 @@ let data =
           postal_codes = [| "10482"; "23817"; "40596"; "67240"; "81935" |];
           format_street_address;
           format_full_address;
+        };
+      company =
+        {
+          suffixes = [| "Inc"; "LLC"; "Group"; "PLC"; "Ltd" |];
+          buzzwords =
+            [|
+              "Adaptive"; "Balanced"; "Business-focused"; "Innovative"; "Robust";
+            |];
+          catch_phrase_words =
+            [|
+              [| "Adaptive"; "Balanced"; "Innovative"; "Robust" |];
+              [| "coherent"; "modular"; "scalable"; "integrated" |];
+              [| "parallelism"; "infrastructure"; "platform"; "framework" |];
+            |];
+          buzz_phrase_words =
+            [|
+              [| "empower"; "integrate"; "synthesize"; "leverage" |];
+              [| "wireless"; "end-to-end"; "back-end"; "cross-platform" |];
+              [| "mindshare"; "paradigms"; "synergies"; "interfaces" |];
+            |];
+          name_patterns =
+            [|
+              { last_name_count = 1; uses_suffix = true };
+              { last_name_count = 2; uses_suffix = false };
+              { last_name_count = 3; uses_suffix = false };
+            |];
+          format_company_name;
+          format_catch_phrase;
+          format_buzz_phrase;
         };
     }

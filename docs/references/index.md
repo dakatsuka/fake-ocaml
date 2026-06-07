@@ -4,6 +4,7 @@ References store external context that future agents need available inside the r
 ## Current References
 
 - [Faker Ruby Address Provider](faker-ruby-address.md)
+- [Faker Ruby Company Provider](faker-ruby-company.md)
 
 ## Reference Policy
 

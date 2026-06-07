@@ -33,11 +33,26 @@ type address = Locale_data_types.address = {
     string;
 }
 
+type name_pattern = Locale_data_types.name_pattern
+
+type company = Locale_data_types.company = {
+  suffixes : string array;
+  buzzwords : string array;
+  catch_phrase_words : string array array;
+  buzz_phrase_words : string array array;
+  name_patterns : name_pattern array;
+  format_company_name :
+    pattern:int -> last_names:string list -> suffix:string -> string;
+  format_catch_phrase : string list -> string;
+  format_buzz_phrase : string list -> string;
+}
+
 type t = Locale_data_types.t = {
   name : name;
   internet : internet;
   lorem : lorem;
   address : address;
+  company : company;
 }
 
 let get locale =

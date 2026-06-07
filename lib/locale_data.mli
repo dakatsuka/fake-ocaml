@@ -55,11 +55,37 @@ type address = Locale_data_types.address = {
 }
 (** Locale-specific data and formatting used by address providers. *)
 
+type name_pattern = Locale_data_types.name_pattern
+(** Metadata for one locale-owned company-name pattern. *)
+
+type company = Locale_data_types.company = {
+  suffixes : string array;
+      (** Legal-entity or organizational suffixes available for company
+          providers. *)
+  buzzwords : string array;
+      (** Single-word marketing or business-jargon terms. *)
+  catch_phrase_words : string array array;
+      (** Three phrase-part groups used by catch-phrase composition. *)
+  buzz_phrase_words : string array array;
+      (** Three phrase-part groups used by buzz-phrase composition. *)
+  name_patterns : name_pattern array;
+      (** Metadata for locale-owned company-name patterns. *)
+  format_company_name :
+    pattern:int -> last_names:string list -> suffix:string -> string;
+      (** Locale-owned company-name formatter. *)
+  format_catch_phrase : string list -> string;
+      (** Locale-owned catch-phrase formatter. *)
+  format_buzz_phrase : string list -> string;
+      (** Locale-owned buzz-phrase formatter. *)
+}
+(** Locale-specific data and formatting used by company providers. *)
+
 type t = Locale_data_types.t = {
   name : name;  (** Data consumed by {!Name}. *)
   internet : internet;  (** Data consumed by {!Internet}. *)
   lorem : lorem;  (** Data consumed by {!Lorem}. *)
   address : address;  (** Data consumed by {!Address}. *)
+  company : company;  (** Data consumed by {!Company}. *)
 }
 (** Complete data bundle for one locale. *)
 

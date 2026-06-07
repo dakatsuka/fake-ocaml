@@ -11,6 +11,7 @@ None.
 
 ## Completed Plans
 
+- [Company Provider Implementation](completed/company-provider.md)
 - [Address Provider Implementation](completed/address-provider.md)
 - [Initial Project Foundation](completed/initial-project-foundation.md)
 - [Lorem Paragraph Provider](completed/lorem-paragraph.md)

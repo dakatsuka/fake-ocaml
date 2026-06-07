@@ -40,6 +40,11 @@ Available providers:
 - `Fake.Lorem.word`
 - `Fake.Lorem.sentence`
 - `Fake.Lorem.paragraph`
+- `Fake.Company.suffix`
+- `Fake.Company.buzzword`
+- `Fake.Company.name`
+- `Fake.Company.catch_phrase`
+- `Fake.Company.buzz_phrase`
 
 ## Development
 Expected local checks:
@@ -64,6 +69,7 @@ Start with [AGENTS.md](AGENTS.md) for agent-facing workflow guidance.
 Key product spec documents:
 - [Initial Public API](docs/product-specs/initial-public-api.md)
 - [Address Provider](docs/product-specs/address-provider.md)
+- [Company Provider](docs/product-specs/company-provider.md)
 - [Future Product Work](docs/product-specs/future-work.md)
 
 Key design documents:

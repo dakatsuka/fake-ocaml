@@ -30,4 +30,24 @@ type address = {
     string;
 }
 
-type t = { name : name; internet : internet; lorem : lorem; address : address }
+type name_pattern = { last_name_count : int; uses_suffix : bool }
+
+type company = {
+  suffixes : string array;
+  buzzwords : string array;
+  catch_phrase_words : string array array;
+  buzz_phrase_words : string array array;
+  name_patterns : name_pattern array;
+  format_company_name :
+    pattern:int -> last_names:string list -> suffix:string -> string;
+  format_catch_phrase : string list -> string;
+  format_buzz_phrase : string list -> string;
+}
+
+type t = {
+  name : name;
+  internet : internet;
+  lorem : lorem;
+  address : address;
+  company : company;
+}

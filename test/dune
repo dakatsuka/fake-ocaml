@@ -5,14 +5,16 @@
   name_test
   internet_test
   lorem_test
-  address_test)
+  address_test
+  company_test)
  (modules
   generator_test
   locale_test
   name_test
   internet_test
   lorem_test
-  address_test)
+  address_test
+  company_test)
  (libraries fake alcotest))
 
 (rule
@@ -23,7 +25,8 @@
   ../lib/name.ml
   ../lib/internet.ml
   ../lib/lorem.ml
-  ../lib/address.ml)
+  ../lib/address.ml
+  ../lib/company.ml)
  (action
   (run
    bash
@@ -32,7 +35,8 @@
    %{dep:../lib/name.ml}
    %{dep:../lib/internet.ml}
    %{dep:../lib/lorem.ml}
-   %{dep:../lib/address.ml})))
+   %{dep:../lib/address.ml}
+   %{dep:../lib/company.ml})))
 
 (rule
  (alias runtest)
