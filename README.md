@@ -63,6 +63,7 @@ Start with [AGENTS.md](AGENTS.md) for agent-facing workflow guidance.
 
 Key product spec documents:
 - [Initial Public API](docs/product-specs/initial-public-api.md)
+- [Address Provider](docs/product-specs/address-provider.md)
 - [Future Product Work](docs/product-specs/future-work.md)
 
 Key design documents:
